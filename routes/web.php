@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,7 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/calendar', function () {
-    return view('calendar');
-});
+Route::get('/calendar', [AppointmentController::class, 'calendar'])->name('calendar');
 
 Auth::routes();
 
