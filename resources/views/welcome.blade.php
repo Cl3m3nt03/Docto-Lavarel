@@ -33,7 +33,7 @@
         </div>
     @endif
         <div class="">
-            <h1 class="text-7xl text-white font-bold">DoctoRavel</h1>
+            <h1 class="text-8xl text-white font-bold">DoctoRavel</h1>
         </div>
 </div>
 
