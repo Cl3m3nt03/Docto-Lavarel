@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Appointment;
 
-class TakeAppointment
+use App\Http\Controllers\Controller;
+
+class TakeAppointment extends Controller
 {
+    public function index(){
+    }
 
 }
