@@ -21,7 +21,7 @@
         <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen flex items-center justify-center">
         <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg text-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-6">Prendre un Rendez-vous</h2>
-            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg m-3">
                 <form id="regForm" action="" method="post" class="space-y-6 flex flex-col items-center">
                     @csrf
                     <!-- Étape 1: Informations personnelles -->
