@@ -44,6 +44,8 @@
                     <div class="tab w-full max-w-md" style="display:none;">
                         <input type="date" name="date" required
                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="timeSelect" name="horraire" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4 hidden">
+                        </select>
                     </div>
 
                     <!-- Boutons de navigation -->
@@ -109,6 +111,50 @@
                     }
                     steps[n].classList.add("bg-blue-500");
                 }
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    const dateInput = document.querySelector("input[name='date']");
+                    const timeSelect = document.getElementById("timeSelect");
+
+                    dateInput.addEventListener("change", function () {
+                        if (dateInput.value) {
+                            timeSelect.innerHTML = "";
+
+                            fetch(`/get-schedule-hours?date=${dateInput.value}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log("Horaires reçus:", data);
+
+                                    if (data.length > 0) {
+                                        let startTime = data[0].start_time;
+                                        let endTime = data[0].end_time;
+
+                                        let startHour = parseInt(startTime.split(":")[0]);
+                                        let endHour = parseInt(endTime.split(":")[0]);
+
+                                        for (let hour = startHour; hour <= endHour; hour++) {
+                                            const option = document.createElement("option");
+                                            option.value = hour + ":00";
+                                            option.textContent = hour + ":00";
+                                            timeSelect.appendChild(option);
+                                        }
+
+                                        timeSelect.classList.remove("hidden");
+                                    } else {
+                                        console.log("Aucun horaire trouvé pour cette date.");
+                                        timeSelect.classList.add("hidden");
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Erreur lors de la récupération des horaires:', error);
+                                });
+                        } else {
+                            timeSelect.classList.add("hidden");
+                        }
+                    });
+                });
+
+
             </script>
 
         </div>

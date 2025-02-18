@@ -22,3 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
+Route::get('/home/show' ,[App\Http\Controllers\ScheduleController::class, 'show'] )->name('home');
+Route::get('/get-schedule-hours', [ScheduleController::class, 'show']);
+

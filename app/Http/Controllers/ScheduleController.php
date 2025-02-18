@@ -58,4 +58,11 @@ class ScheduleController extends Controller
         return redirect()->route('schedules.index')->with('success', 'Créneau ajouté avec succès.');
     }
 
+    public function show(Request $request)
+    {
+        //Recup Data for form
+        $date = $request->input('date');
+        $schedule = Schedule::where('date', $date)->get(['start_time', 'end_time']);
+        return response()->json($schedule);
+    }
 }
