@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,4 +26,25 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'prenom' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'date' => 'required|date',
+        ]);
+
+        Appointment::create([
+            'prenom' => $request->prenom,
+            'nom' => $request->nom,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'date' => $request->date,
+        ]);
+
+        return redirect()->back()->with('success', 'Rendez-vous enregistré avec succès !');
+    }
+
 }
