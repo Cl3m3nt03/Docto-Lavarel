@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ScheduleController;
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('schedules', ScheduleController::class);
-});
+use App\Http\Controllers\ScheduleController;
+Route::resource('schedules', ScheduleController::class);
+
 
 
 Route::get('/', function () {
