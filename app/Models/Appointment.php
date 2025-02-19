@@ -17,4 +17,5 @@ class Appointment extends Model
         'phone',
         'date'
     ];
+
 }

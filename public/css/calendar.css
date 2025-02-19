@@ -1,0 +1,12 @@
+button.odd\:bg-red{
+    background-color: red;
+    color:black;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+button.odd\:bg-red:hover{
+    background-color: darkred;
+    color: white;
+    cursor:pointer;
+}

@@ -13,10 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     events: '/appointments',
     selectable: true,
     editable: true,
-});
+    height: 400,
+    });
     calendar.render();
 });
 
+
+/*
     var calendar = new Calendar(calendarEl,{
         timezone: 'UTC',
         events: [
@@ -32,3 +35,4 @@ var event = calendar.getEventById('a');
 var start = event.start;
 var end = event.end;
 console.log(start.toISOString);
+*/

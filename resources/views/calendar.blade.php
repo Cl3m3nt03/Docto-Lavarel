@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.11.0/main.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
-
+    <link rel="stylesheet" href="{{asset('css/calendar.css')}}">
 
     <body class="antialiased">
 
@@ -28,35 +28,45 @@
                 @endif
         </div>
         <h1 class="text-center mb-5">Calendar</h1>
-        <div id='calendar'>
-
-
-            <button class="button is-warning py-1 px-2 mx-5 my-3 hover:cursor-pointer">supprimer</button>
+        <div id='calendar' class="mx-auto h-75 w-50" > </div>
+        <div class="overflow-x-auto p-5">
             <h2 class="my-6 py-5 text-center text-2xl font-bold text-gray-800">Liste des rendez-vous</h2>
-
-            <div class="overflow-x-auto p-5">
-                <table class="min-w-full border-collapse border border-gray-300 shadow-lg bg-white rounded-lg">
-                    <thead class="bg-gray-200">
+            <div class="overflow-x-auto">
+                <table class="mx-auto align-items-center min-w-max border-collapse border border-gray-300 shadow-lg bg-white rounded-4xl    ">
+                    <thead class="bg-gray-200 ">
+                    @if($appointments->isNotEmpty())
+                    @foreach($appointments as $appointment)
                     <tr>
-                        <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Nom du Patient</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Prénom du Patient</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Téléphone</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Date du rendez-vous</th>
+                        <th class="border-2 border-gray-300 px-4 py-3 text-left">Nom du patient</th>
+                        <th class="border-2 border-gray-300 px-4 py-3 text-left">Prénom du patient</th>
+                        <th class="border-2 border-gray-300 px-4 py-3 text-left">Email</th>
+                        <th class="border-2 border-gray-300 px-4 py-3 text-left">Téléphone</th>
+                        <th class="border-2 border-gray-300 px-4 py-3 text-left">Date du rendez-vous</th>
+                        <th class="border-2 border-gray-300 px-4 py-3 text-left">Supprimer</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if ($schedules->isNotEmpty())
-                    @foreach ($schedules as $schedule)
-                        <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
-                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->id }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->nom }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->prenom }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->email }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->phone }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->date }}</td>
-                        </tr>
+                    <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-300 transition">
+                        <td class="border border-gray-300 px-4 py-3">{{ $appointment->nom }}</td>
+                        <td class="border border-gray-300 px-4 py-3">{{ $appointment->prenom }}</td>
+                        <td class="border border-gray-300 px-4 py-3">{{ $appointment->email }}</td>
+                        <td class="border border-gray-300 px-4 py-3">{{ $appointment->telephone }}</td>
+                        <td class="border border-gray-300 px-4 py-3">{{ $appointment->date }}</td>
+                        <td class="border border-gray-300 px-4 py-3">
+                            <form action="{{ route('appointment.destroy', $appointment->id) }}" method="POST" onsubmit="return confirm('vous êtes sur le point de supprimer votre rendez-vous, voulez vous vraiment continuer ?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="odd:bg-red">Annuler</button>
+                            </form>
+
+                            @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                        </td>
+                    </tr>
                     @endforeach
                     @endif
                     </tbody>
