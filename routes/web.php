@@ -4,13 +4,19 @@ use App\Http\Controllers\Appointment\TakeAppointment;
 use App\Http\Controllers\contactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ScheduleController;
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('schedules', ScheduleController::class);
-});
+    Route::get('/schedules', [ScheduleController::class, 'index'])
+        ->name('schedules.index');
 
+    Route::get('/schedules/create', [ScheduleController::class, 'create'])
+        ->name('schedules.create')
+        ->middleware('can:create,App\Models\Schedule');
+
+    Route::post('/schedules', [ScheduleController::class, 'store'])
+        ->name('schedules.store');
+});
 
 Route::get('/', function () {
     return view('welcome');
