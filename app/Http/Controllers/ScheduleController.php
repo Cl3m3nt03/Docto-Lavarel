@@ -10,12 +10,13 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = Schedule::all();
+        $schedules = Schedule::with('doctor')->get();
         return view('schedules.index', compact('schedules'));
     }
 
     public function create()
     {
+        $this->authorize('create', Schedule::class);
         return view('schedules.create');
     }
 
@@ -27,7 +28,7 @@ class ScheduleController extends Controller
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
 
-        $exists = Schedule::where('user_id', Auth::id())
+        $exists = Schedule::where('doctor_id', Auth::id())
             ->where('date', $request->date)
             ->where(function ($query) use ($request) {
                 $query->whereBetween('start_time', [$request->start_time, $request->end_time])
@@ -44,18 +45,17 @@ class ScheduleController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->withErrors(['error' => 'Ce créneau chevauche un créneau existant.']);
+            return redirect()->back()->withErrors(['error' => '🚫 Ce créneau chevauche un créneau existant.']);
         }
 
         Schedule::create([
             'user_id' => Auth::id(),
-            'doctor_id' => $request->doctor_id,
+            'doctor_id' => Auth::id(),
             'date' => $request->date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->route('schedules.index')->with('success', 'Créneau ajouté avec succès.');
+        return redirect()->route('schedules.index')->with('success', '✅ Créneau ajouté avec succès.');
     }
-
 }

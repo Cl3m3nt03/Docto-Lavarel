@@ -65,14 +65,23 @@
                                 </div>
                             </div>
 
+
                             <div class="row mb-3">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="doctor" id="doctor" value="1" {{ old('doctor') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="doctor">
-                                            {{ __('Are you a doctor?') }}
-                                        </label>
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('Doctor ?') }}</label>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input @error('doctor') is-invalid @enderror" type="radio" name="doctor" id="Doctor_yes" value="1" {{ old('doctor') == '1' ? 'checked' : '' }} required>
+                                        <label class="form-check-label" for="Doctor_yes">Oui</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input @error('doctor') is-invalid @enderror" type="radio" name="doctor" id="Doctor_no" value="0" {{ old('doctor') == '0' ? 'checked' : '' }} required>
+                                        <label class="form-check-label" for="Doctor_no">Non</label>
+                                    </div>
+                                    @error('doctor')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
                                 </div>
                             </div>
 
