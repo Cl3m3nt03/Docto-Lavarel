@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
     use HasFactory;
+
     protected $table = 'schedule';
+
 
     protected $fillable = [
         'user_id',
@@ -17,5 +19,4 @@ class Schedule extends Model
         'start_time',
         'end_time',
     ];
-
 }

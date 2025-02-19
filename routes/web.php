@@ -5,16 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\ScheduleController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('schedules', ScheduleController::class);
+});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,3 +28,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
+Route::get('/home/show' ,[App\Http\Controllers\ScheduleController::class, 'show'] )->name('home');
+Route::get('/get-schedule-hours', [ScheduleController::class, 'show']);
+

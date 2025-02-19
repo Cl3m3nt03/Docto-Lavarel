@@ -34,6 +34,7 @@ class HomeController extends Controller
             'email' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'date' => 'required|date',
+            'horraire' => 'required',
         ]);
 
         Appointment::create([
@@ -42,6 +43,7 @@ class HomeController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'date' => $request->date,
+            'horraire' => $request->horraire,
         ]);
 
         return redirect()->back()->with('success', 'Rendez-vous enregistré avec succès !');
