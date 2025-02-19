@@ -11,4 +11,5 @@ class Appointment extends Model
     use HasFactory;
     protected $table = 'appointment';
     protected $fillable = ['prenom', 'nom', 'email', 'phone', 'date','horraire'];
+
 }

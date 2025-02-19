@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Appointment\TakeAppointment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
 Route::get('/home/show' ,[App\Http\Controllers\ScheduleController::class, 'show'] )->name('home');
 Route::get('/get-schedule-hours', [ScheduleController::class, 'show']);
-
+Route::get('/debug/appoitment', [TakeAppointment::class, 'index']);

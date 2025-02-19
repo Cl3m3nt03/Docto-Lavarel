@@ -125,35 +125,30 @@
                                 .then(data => {
                                     console.log("Horaires reçus:", data);
 
-                                    if (data.length > 0) {
-                                        let startTime = data[0].start_time;
-                                        let endTime = data[0].end_time;
+                                    if (data.available_times && data.available_times.length > 0) {
+                                        const availableTimes = data.available_times;
 
-                                        let startHour = parseInt(startTime.split(":")[0]);
-                                        let endHour = parseInt(endTime.split(":")[0]);
-
-                                        for (let hour = startHour; hour <= endHour; hour++) {
+                                        availableTimes.forEach(time => {
                                             const option = document.createElement("option");
-                                            option.value = hour + ":00";
-                                            option.textContent = hour + ":00";
+                                            option.value = time;
+                                            option.textContent = time;
                                             timeSelect.appendChild(option);
-                                        }
+                                        });
 
                                         timeSelect.classList.remove("hidden");
                                     } else {
-                                        console.log("Aucun horaire trouvé pour cette date.");
-                                        timeSelect.classList.add("hidden");
+                                        const option = document.createElement("option");
+                                        option.value = "";
+                                        option.textContent = "Aucun horaire disponible";
+                                        timeSelect.appendChild(option);
                                     }
                                 })
                                 .catch(error => {
-                                    console.error('Erreur lors de la récupération des horaires:', error);
+                                    console.error("Erreur lors de la récupération des horaires:", error);
                                 });
-                        } else {
-                            timeSelect.classList.add("hidden");
                         }
                     });
                 });
-
 
             </script>
 

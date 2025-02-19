@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,9 +62,43 @@ class ScheduleController extends Controller
 
     public function show(Request $request)
     {
-        //Recup Data for form
-        $date = $request->input('date');
-        $schedule = Schedule::where('date', $date)->get(['start_time', 'end_time']);
-        return response()->json($schedule);
+        // Récupération de la date du formulaire
+        $date       = $request->input('date');
+        $schedule   = Schedule::where('date', $date)->first(['start_time', 'end_time']);
+        $data       = [];
+        $availableTimes = [];
+
+        $appointmentsData = [];
+        $appointments = Appointment::where('date', $date)->get(['horraire']);
+
+        foreach ($appointments as $appointment) {
+            $appointmentsData[] = Carbon::parse($appointment->horraire)->format('H:i');
+        }
+
+        if ($schedule) {
+            $start  = Carbon::parse($schedule->start_time);
+            $end    = Carbon::parse($schedule->end_time);
+            $hours  = $start->diffInHours($end);
+
+            for ($i = 0; $i < $hours; $i++) {
+                $availableTime = $start->copy()->addHours($i)->format('H:i');
+
+                if (!in_array($availableTime, $appointmentsData)) {
+                    $availableTimes[] = $availableTime;
+                }
+            }
+        }
+
+        if (count($availableTimes) > 0) {
+            return response()->json([
+                'available_times' => $availableTimes,
+                'message' => 'Les horaires sont disponibles.'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Il n\'y a pas d\'horaires disponibles pour cette date.'
+        ]);
     }
+
 }

@@ -24,7 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'appointments' => Appointment::all(),
+        ]);
+    }
+
+    public function getScheduleHours(Request $request)
+    {
+        $date = $request->input('date');
+        $appointments = Appointment::whereDate('date', $date)->get();
+
+        $busyHours = [];
+        foreach ($appointments as $appointment) {
+            $busyHours[] = $appointment->horraire;
+        }
+
+        return response()->json($busyHours);
     }
     public function store(Request $request)
     {
