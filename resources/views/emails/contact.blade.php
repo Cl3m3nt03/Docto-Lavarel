@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message de Contact</title>
 </head>
 <body>
-<h2>Prise de contact sur mon beau site</h2>
-<p>Réception d'une prise de contact avec les éléments suivants :</p>
-<ul>
-    <li><strong>Nom</strong> : {{ $contact['nom'] }}</li>
-    <li><strong>Email</strong> : {{ $contact['email'] }}</li>
-    <li><strong>Message</strong> : {{ $contact['message'] }}</li>
-</ul>
+<h2>Nouveau Message de Contact</h2>
+<p><strong>Nom :</strong> {{ $details['name'] }}</p>
+<p><strong>Email :</strong> {{ $details['email'] }}</p>
+<p><strong>Message :</strong> {{ $details['message'] }}</p>
 </body>
 </html>
