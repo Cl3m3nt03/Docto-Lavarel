@@ -25,12 +25,16 @@
                     <a href="{{ route('register') }}" class="text-2xl ml-4 font-bold text-white hover:text-gray-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-black-500">Register</a>
                 @endif
             @endauth
+                @endif
         </div>
         <h1 class="text-center mb-5">Calendar</h1>
         <div id='calendar'>
+
+
+            <button class="button is-warning py-1 px-2 mx-5 my-3 hover:cursor-pointer">supprimer</button>
             <h2 class="my-6 py-5 text-center text-2xl font-bold text-gray-800">Liste des rendez-vous</h2>
 
-            <div class="overflow-x-auto p-4">
+            <div class="overflow-x-auto p-5">
                 <table class="min-w-full border-collapse border border-gray-300 shadow-lg bg-white rounded-lg">
                     <thead class="bg-gray-200">
                     <tr>
@@ -40,30 +44,27 @@
                         <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
                         <th class="border border-gray-300 px-4 py-2 text-left">Téléphone</th>
                         <th class="border border-gray-300 px-4 py-2 text-left">Date du rendez-vous</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Créé le</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Mis à jour le</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($appointments as $appointment)
+                    @if ($schedules->isNotEmpty())
+                    @foreach ($schedules as $schedule)
                         <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->id }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->nom }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->prenom }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->email }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->phone }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->date }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->created_at }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->updated_at }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->id }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->nom }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->prenom }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->email }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->phone }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $schedule->date }}</td>
                         </tr>
                     @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
 
         </div>
         </div>
-@endif
-
-</body>
 @endsection
+</body>
+

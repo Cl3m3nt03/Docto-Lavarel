@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
@@ -24,6 +25,8 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/calendar', [AppointmentController::class, 'calendar'])->name('calendar');
+Route::get('/schedule', [ScheduleController::class, 'schedules'])->name('calendar');
+
 
 Auth::routes();
 
