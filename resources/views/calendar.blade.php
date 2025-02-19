@@ -28,35 +28,39 @@
         </div>
         <h1 class="text-center mb-5">Calendar</h1>
         <div id='calendar'>
-            <h2 class="my-4 py-5 text-center">Liste des rendez-vous</h2>
+            <h2 class="my-6 py-5 text-center text-2xl font-bold text-gray-800">Liste des rendez-vous</h2>
 
-            <table class="border-1">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom du Patient</th>
-                    <th>Prénom du Patient</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
-                    <th>Date du rendez-vous</th>
-                    <th>Statut</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($appointments as $appointment)
+            <div class="overflow-x-auto p-4">
+                <table class="min-w-full border-collapse border border-gray-300 shadow-lg bg-white rounded-lg">
+                    <thead class="bg-gray-200">
                     <tr>
-                        <td>{{ $appointment->id }}</td>
-                        <td>{{ $appointment->nom }}</td>
-                        <td>{{ $appointment->prenom }}</td>
-                        <td>{{ $appointment->email }}</td>
-                        <td>{{ $appointment->phone }}</td>
-                        <td>{{ $appointment->date }}</td>
-                        <td>{{ $appointment->created_at }}</td>
-                        <td>{{ $appointment->updated_at }}</td>
+                        <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Nom du Patient</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Prénom du Patient</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Téléphone</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Date du rendez-vous</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Créé le</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Mis à jour le</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($appointments as $appointment)
+                        <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->id }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->nom }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->prenom }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->email }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->phone }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->date }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->created_at }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $appointment->updated_at }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
         </div>
 @endif
