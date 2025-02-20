@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
-    public function index()
-    {
-        $schedules = Schedule::with('doctor')->get();
-        return view('schedules.create', compact('schedules'));
-    }
 
     public function create()
     {

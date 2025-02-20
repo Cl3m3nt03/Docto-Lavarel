@@ -5,7 +5,6 @@
         @can('create', App\Models\Schedule::class)
             <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">🕒 Ajouter un créneau horaire</h2>
 
-            {{-- ✅ Gestion des erreurs --}}
             @if ($errors->any())
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
                     <strong>Erreur(s) :</strong>
@@ -49,5 +48,21 @@
                 🚫 Vous n'avez pas accès à cette page.
             </p>
         @endcan
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
     </div>
 @endsection
