@@ -5,7 +5,7 @@
     <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg text-center">
         <h2 class="text-3xl font-bold text-gray-800 mb-6">Prendre un Rendez-vous</h2>
         <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg m-3">
-            <form id="regForm" action="{{ route('send.mail') }}" method="post" class="space-y-6 flex flex-col items-center">
+            <form id="regForm" action="{{ route('appointments.store') }}" method="post" class="space-y-6 flex flex-col items-center">
                 @csrf
                 <!-- Étape 1: Informations personnelles -->
                 <div class="tab w-full max-w-md">

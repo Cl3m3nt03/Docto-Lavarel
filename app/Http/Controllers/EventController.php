@@ -19,7 +19,7 @@ class EventController extends Controller
                 'id'    => $event->id,
                 'name'  => $event->prenom . ' ' . $event->nom,
                 'title' => $event->nom,
-                'start' => $event->date . 'T' . $event->heure, // Correction ici : utilisation de `heure`
+                'start' => $event->date . 'T' . $event->heure,
             ];
         });
 
@@ -49,7 +49,6 @@ class EventController extends Controller
 
     public function update(Request $request, $id): JsonResponse
     {
-        // Trouver l'événement ou renvoyer une erreur
         $event = Appointment::findOrFail($id);
 
         // Validation des données
@@ -60,7 +59,6 @@ class EventController extends Controller
             'heure'  => 'sometimes|required|date_format:H:i',
         ]);
 
-        // Mise à jour de l'événement
         $event->update($validated);
 
         return response()->json($event);
@@ -76,14 +74,13 @@ class EventController extends Controller
 
     public function getAllEventsCalendar(): JsonResponse
     {
-        // Récupérer les événements depuis la base de données
         $events = Appointment::all();
 
         // Transformer les données pour FullCalendar
         $formattedEvents = $events->map(function ($event) {
             return [
                 'title'    => $event->prenom,
-                'nom' => $event->nom,  // Titre affiché sur le calendrier
+                'nom' => $event->nom,
                 'start' => $event->date,
 
             ];

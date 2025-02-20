@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -61,6 +63,17 @@ class HomeController extends Controller
             'date' => $request->date,
             'horraire' => $request->horraire,
         ]);
+
+        $Mail = Auth::user()->email;
+        $Pseudo = Auth::user()->name;
+
+        $details = [
+            'name' => $Pseudo,
+            'email' => 'Ceci est mail de Doctorlaravel',
+            'message' => 'Je suis heureux de vous annoncer que votre rendez-vous est validé !'
+        ];
+
+        Mail::to($Mail)->send(new ContactMail($details));
 
         return redirect()->back()->with('success', 'Rendez-vous enregistré avec succès !');
     }

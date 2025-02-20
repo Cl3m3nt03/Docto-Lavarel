@@ -9,15 +9,15 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\EventController;
 
 
-// 🔒 Routes protégées pour les utilisateurs connectés
+// Que pour les utilisateurs connectés
 Route::middleware(['auth'])->group(function () {
 
-    // 🗓️ Accès restreint : seul un doctor peut accéder aux événements
+    //seul un doctor peut accéder aux événements
     Route::get('/events', [EventController::class, 'getAllEventsCalendar'])
         ->name('events.index')
         ->middleware('isDoctor');
 
-    // ➕ Création de créneau protégée par la policy
+    //créneau protégée par la policy
     Route::get('/schedules/create', [ScheduleController::class, 'create'])
         ->name('schedules.create')
         ->middleware('can:create,App\Models\Schedule');
@@ -52,5 +52,7 @@ Route::get('/get-schedule-hours', [ScheduleController::class, 'show']);
 Route::get('/debug/appoitment', [TakeAppointment::class, 'index']);
 Route::post('/send-mail', [contactController::class, 'sendMail'])->name('send.mail');
 Route::get('/receive-mail', [contactController::class, 'index']);
+Route::post('/appointments', [\App\Http\Controllers\HomeController::class, 'store'])->name('appointments.store');
 Route::get('/appointment', [TakeAppointment::class, 'view'])->name('appointment');
 Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/events', [EventController::class, 'getAllEventsCalendar']);
