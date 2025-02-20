@@ -21,7 +21,9 @@
 <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen flex items-center justify-center">
     @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+
             @auth
+                <a href="{{ url('/calendar') }}" class="text-2xl font-bold text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Calendar</a>
                 <a href="{{ url('/home') }}" class="text-2xl font-bold text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
             @else
                 <a href="{{ route('login') }}" class="text-2xl font-bold text-white hover:text-gray-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-black-500">Log in</a>
@@ -36,7 +38,6 @@
             <h1 class="text-8xl text-white font-bold">DoctoRavel</h1>
         </div>
 </div>
-
 
 </body>
 </html>

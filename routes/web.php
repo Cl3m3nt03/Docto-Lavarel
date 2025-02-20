@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\Appointment\TakeAppointment;
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\EventController;
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/schedules', [ScheduleController::class, 'index'])
@@ -26,6 +29,15 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+
+Route::get('/events', [EventController::class, 'getAllEvents'])->name('calendar');
+
+
+
+Route::get('/calendar', [AppointmentController::class, 'calendar'])->name('calendar');
+Route::get('/schedule', [ScheduleController::class, 'schedules'])->name('calendar');
+Route::delete('/appointment/{id}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -37,3 +49,4 @@ Route::post('/send-mail', [contactController::class, 'sendMail'])->name('send.ma
 Route::get('/receive-mail', [contactController::class, 'index']);
 Route::get('/appointment', [TakeAppointment::class, 'view'])->name('appointment');
 Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/events', [EventController::class, 'getAllEventsCalendar']);
