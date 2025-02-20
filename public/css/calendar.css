@@ -10,3 +10,17 @@ button.odd\:bg-red:hover{
     color: white;
     cursor:pointer;
 }
+
+
+button.odd\:bg-green{
+    background-color: forestgreen;
+    color:black;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+button.odd\:bg-green:hover{
+    background-color: lawngreen;
+    color: black;
+    cursor:pointer;
+}

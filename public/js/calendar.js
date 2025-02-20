@@ -2,25 +2,6 @@
 /*!**********************************!*\
   !*** ./resources/js/calendar.js ***!
   \**********************************/
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth'
-  });
-  calendar.render();
-});
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    events: '/appointments',
-    selectable: true,
-    editable: true,
-    height: 400
-  });
-  calendar.render();
-});
-
 /*
     var calendar = new Calendar(calendarEl,{
         timezone: 'UTC',

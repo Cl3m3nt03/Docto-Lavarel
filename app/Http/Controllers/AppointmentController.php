@@ -16,8 +16,10 @@ class AppointmentController extends Controller
     }
 
     public function destroy($id){
-        $appointement = Appointment::findOrFail($id);
-        $appointement->delete();
-        return redirect()->route('calendar')->with('success','Le rendez-vous à bien été annuler !');
+        $appointment = Appointment::findOrFail($id);
+        $appointment->delete();
+        return redirect()->back()->with('success','Le rendez-vous à bien été annuler !');
     }
+
+
 }
