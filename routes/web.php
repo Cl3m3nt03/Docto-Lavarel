@@ -34,3 +34,4 @@ Route::get('/home/show' ,[App\Http\Controllers\ScheduleController::class, 'show'
 Route::get('/get-schedule-hours', [ScheduleController::class, 'show']);
 Route::get('/debug/appoitment', [TakeAppointment::class, 'index']);
 Route::get('/send-mail', [contactController::class, 'sendMail']);
+Route::get('/receive-mail', [contactController::class, 'index']);
