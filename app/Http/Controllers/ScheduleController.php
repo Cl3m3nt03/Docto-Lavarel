@@ -13,7 +13,7 @@ class ScheduleController extends Controller
     public function index()
     {
         $schedules = Schedule::with('doctor')->get();
-        return view('schedules.index', compact('schedules'));
+        return view('schedules.create', compact('schedules'));
     }
 
     public function create()
@@ -58,7 +58,7 @@ class ScheduleController extends Controller
             'end_time' => $request->end_time,
         ]);
 
-        return redirect()->route('schedules.index')->with('success', '✅ Créneau ajouté avec succès.');
+        return redirect()->route('schedules.create')->with('success', '✅ Créneau ajouté avec succès.');
     }
 
     public function show(Request $request)
@@ -101,5 +101,4 @@ class ScheduleController extends Controller
             'message' => 'Il n\'y a pas d\'horaires disponibles pour cette date.'
         ]);
     }
-
 }

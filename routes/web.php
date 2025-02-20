@@ -8,7 +8,7 @@ use App\Http\Controllers\ScheduleController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/schedules', [ScheduleController::class, 'index'])
-        ->name('schedules.index');
+        ->name('schedules.create');
 
     Route::get('/schedules/create', [ScheduleController::class, 'create'])
         ->name('schedules.create')

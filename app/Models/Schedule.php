@@ -17,4 +17,8 @@ class Schedule extends Model
         'start_time',
         'end_time',
     ];
+
+    public function doctor(){
+        return $this->belongsTo(User::class, 'doctor_id');
+    }
 }
