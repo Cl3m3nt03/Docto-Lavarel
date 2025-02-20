@@ -22,18 +22,20 @@ class contactController extends Controller
     {
 
         $Mail = Auth::user()->email;
-
+        $Pseudo = Auth::user()->name;
 
         $details = [
-            'name' => 'Bonjour Mateis  ! ',
+            'name' => $Pseudo,
             'email' => 'Ceci est mail de Doctorlaravel',
             'message' => 'Ceci est un message de test. Et bienvenue sur Doctor laravel !'
         ];
 
         Mail::to($Mail)->send(new ContactMail($details));
 
-        return "E-mail envoyé avec succès !";
+        return redirect()->back()->with('status', 'E-mail envoyé avec succès !');
     }
+
+
 
 
 }

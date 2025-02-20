@@ -15,4 +15,8 @@ class TakeAppointment extends Controller
 
     }
 
+    public function view(Request $request){
+        return view('appointment');
+    }
+
 }

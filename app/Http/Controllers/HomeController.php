@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -62,6 +63,12 @@ class HomeController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Rendez-vous enregistré avec succès !');
+    }
+
+    public function dataiddoctor(){
+        $idDoctor = Auth::user()->doctor;
+
+        return response($idDoctor);
     }
 
 }

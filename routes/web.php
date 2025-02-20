@@ -33,5 +33,7 @@ Route::post('/home', [App\Http\Controllers\HomeController::class, 'store'])->nam
 Route::get('/home/show' ,[App\Http\Controllers\ScheduleController::class, 'show'] )->name('home');
 Route::get('/get-schedule-hours', [ScheduleController::class, 'show']);
 Route::get('/debug/appoitment', [TakeAppointment::class, 'index']);
-Route::get('/send-mail', [contactController::class, 'sendMail']);
+Route::post('/send-mail', [contactController::class, 'sendMail'])->name('send.mail');
 Route::get('/receive-mail', [contactController::class, 'index']);
+Route::get('/appointment', [TakeAppointment::class, 'view'])->name('appointment');
+Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

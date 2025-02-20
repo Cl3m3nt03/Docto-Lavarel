@@ -15,7 +15,7 @@
 
     <!-- Scripts -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <script src="{{ asset('js/main.js') }}"></script>
 </head>
 <body>
     <div id="app">
@@ -51,6 +51,10 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                <a id="navbarDropdown" href="{{route('appointment')}}">Appointment</a>
+                                @if($idDoctor === 1)
+                                    <a id="navbarDropdown" href="{{route('schedules.create')}}">Schedule</a>
+                                @endif
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
