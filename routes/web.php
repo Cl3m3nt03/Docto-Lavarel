@@ -9,7 +9,6 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\EventController;
 
 
-// Que pour les utilisateurs connectés
 Route::middleware(['auth'])->group(function () {
 
     //seul un doctor peut accéder aux événements
@@ -39,7 +38,6 @@ Route::get('/events', [EventController::class, 'getAllEvents'])->name('calendar'
 
 
 
-Route::get('/calendar', [AppointmentController::class, 'calendar'])->name('calendar');
 Route::get('/schedule', [ScheduleController::class, 'schedules'])->name('calendar');
 Route::delete('/appointment/{id}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
 
